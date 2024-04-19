@@ -1,0 +1,3 @@
+[submodule "Packages/SimpleNeuronAnalysis"]
+	path = Packages/SimpleNeuronAnalysis
+	url = https://github.com/JianZhongBerkeley/SimpleNeuronAnalysisPublic.git
