@@ -12,9 +12,10 @@ from Packages.SimpleNeuronAnalysis.NeuralActivities.PairwiseCorrelation import (
     shift_correct_cov_matrix,
 )
 
+
 def voltage_imaging_pairwise_cc(
-    time_per_frame_ms,
     src_file_path,
+    time_per_frame_ms,
     win_size,
     pre_rm_size,
 ):    
@@ -32,7 +33,7 @@ def voltage_imaging_pairwise_cc(
     with h5py.File(src_file_path, "r") as hdf5_file:
         nof_rois = hdf5_file["nof_roi"][()]
         nof_frames = hdf5_file["nof_frames"][()]
-        nof_trials = hdf5_file["nof_files"][()]
+        nof_trials = hdf5_file["nof_trials"][()]
 
         roi_spike_events = np.zeros((nof_rois, nof_trials, nof_frames))
         roi_subthd_dFFs = np.zeros((nof_rois, nof_trials, nof_frames))
@@ -76,4 +77,15 @@ def voltage_imaging_pairwise_cc(
     return (xs, ys)
 
 
-
+# run this script as demo script
+if __name__ == "__main__":
+    demo_src_file_path = "./DemoData/Voltage/demo_data.hdf5"
+    demo_xs, demo_ys = voltage_imaging_pairwise_cc(
+        demo_src_file_path,
+        2.6,
+        40,
+        100,
+    )
+    print(f"Mean subthreshold CC: {np.mean(demo_xs):0.2f}")
+    print(f"Mean supratershold CC: {np.mean(demo_ys):0.2f}")
+    

@@ -16,21 +16,12 @@ def analyze_blood_flow_dynamics(
 ):
     sys.dont_write_bytecode = True
 
-    hybridvel_roi_nums = None
     hybridvel_angles = None
 
     with h5py.File(src_file_path, "r") as hdf5_file:
-        hybridvel_roi_nums = hdf5_file["/roi_nums"][()]
         hybridvel_angles = hdf5_file["/angles"][()]
 
-    hybridvel_roi_nums = np.rollaxis(hybridvel_roi_nums, -1, 0)
-    hybridvel_roi_nums = np.squeeze(hybridvel_roi_nums)
     hybridvel_angles = np.rollaxis(hybridvel_angles, -1, 0)
-
-    roi_sorted_order = np.argsort(hybridvel_roi_nums)
-
-    hybridvel_roi_nums = hybridvel_roi_nums[roi_sorted_order]
-    hybridvel_angles = hybridvel_angles[roi_sorted_order,...]
 
     process_speed_arr = hybridvel_angles[process_idx, :, -1, :].copy()
     nof_cands = process_speed_arr.shape[0]
@@ -57,5 +48,24 @@ def analyze_blood_flow_dynamics(
     process_filtered_speed = trace_kalman_filter(process_selected_speed)
     
     return process_filtered_speed
+
+
+# run this script as demo
+if __name__ == "__main__":
+    import matplotlib.pyplot as plt
+    
+    demo_src_path = "./DemoData/BloodDynamics/demo_data.hdf5"
+    demo_result = analyze_blood_flow_dynamics(
+        demo_src_path,
+        0,
+        5,
+        3
+    )
+
+    plt.figure()
+    plt.plot(demo_result)
+    plt.show()
+    
+
 
 

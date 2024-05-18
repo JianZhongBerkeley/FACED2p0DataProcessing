@@ -28,7 +28,7 @@ from Packages.SimpleNeuronAnalysis.IO.FcddatPkgOps import (
 
 def volumetric_imaging_registration(
     src_root_dir_path,
-    ref_slice_idx,
+    process_slice_idx,
     src_slice_sub_dir_name,
     src_slice_file_name_glob,
     dst_root_dir_path,
@@ -95,7 +95,7 @@ def volumetric_imaging_registration(
             mc = mcobj_dict.get("mc", None)
             mc_pwrigid = mcobj_dict.get("mc_pwrigid", None)
         
-    src_slice_file_name = src_slice_file_names[ref_slice_idx]
+    src_slice_file_name = src_slice_file_names[process_slice_idx]
 
     fnames = []
     for i_pkg in range(nof_trails):
@@ -155,3 +155,17 @@ def volumetric_imaging_registration(
         pickle.dump(mcobj_dict, pkl_file, pickle.HIGHEST_PROTOCOL)
 
     cm.stop_server(dview=dview)
+
+
+# run this script as 
+if __name__ == "__main__":
+    print("Usage:")
+    print("* Before using this script, split the volumetric imaging data for each trial by Z slices and save them into a subdirectory inside the directory for each trail.")
+    print("* Set src_root_dir_path as the path for the directory which includes all the directories for all trials.")
+    print("* Set process_slice_idx to be index of the slice you would like process.")
+    print("* Set src_slice_sub_dir_name to be the name of the sub directory which contains data for each Z slice")
+    print("* Set src_slice_file_name_glob to be the name pattern on the files for data in each Z slice.")
+    print("* Use dst_root_dir_path and dst_dir_name_pattern to configure the output directory.")
+    print("* Set up other parameters required by CaImAn motion correction.")
+    print("NOTE: Please check the following CaImAn notebook for demonstration on how to use the CaImAn image registration:")
+    print("URL: https://github.com/flatironinstitute/CaImAn/blob/main/demos/notebooks/demo_motion_correction.ipynb")

@@ -130,3 +130,11 @@ def calcium_trace_stats_analysis(
 
     return (t_test_pass, anova_test_pass, roi_OSI, roi_DSI, double_gaussian_fit_obj)
 
+
+# run this script as demo
+if __name__ == "__main__":
+    print("Usage:")
+    print("* Before using this script, perform motion registartion on the volumetric data set and split the volumetric imaging data by Z slices")
+    print("* Set src_data_path as the file path for file path for the image sequence at one Z slice.")
+    print("* Set src_mask_path as the file path for the ROIs (ROIs should be saved as a mask image stack)")
+    print("* Provide experiment configurations for rest of the parameters according to the parameter name")

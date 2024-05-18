@@ -61,5 +61,20 @@ def volumetric_imaging_cell_clustering(
     return (all_slice_idxs, all_roi_idxs, ve_slice_idxs, ve_roi_idxs, os_slice_idxs, os_roi_idxs)
 
 
+# run this script as demo
+if __name__ == "__main__":
+    all_slice_idxs, _, ve_slice_idxs, _, _, _ = volumetric_imaging_cell_clustering(
+        "./DemoData/Calcium/demo_data",
+        "slice" + "[0-9]" * 2,
+        "slice" + "[0-9]" * 2 + ".hdf5",
+        (2, 1.389),
+        10,
+        r"slice\d+",
+        0.7,
+        0.5,
+        25,
+        1.635,
+    )
+    print(f"Total nof cells: {len(all_slice_idxs)}")
+    print(f"Total nof VE cells: {len(ve_slice_idxs)}")
 
-    

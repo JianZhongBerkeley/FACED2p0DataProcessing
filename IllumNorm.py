@@ -9,6 +9,7 @@ from Packages.SimpleNeuronAnalysis.IllumNorm.LineScanNormOps import (
 )
 
 
+# function to perform linescan illumination normalization of FACED line scan
 def illum_norm(
     src_file_path,
 ):
@@ -36,6 +37,17 @@ def illum_norm(
     
     return dst_image
 
+
+## run this script as demo
+if __name__ == "__main__":
+    import matplotlib.pyplot as plt
+
+    demo_src_file_path = "./DemoData/IllumNorm/demo_data.tif"
+    demo_result = illum_norm(demo_src_file_path)
+
+    plt.figure()
+    plt.imshow(demo_result, cmap = "gray")
+    plt.show()
 
 
 

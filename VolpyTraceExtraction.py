@@ -77,8 +77,15 @@ def volpy_trace_extraction(
     return (dFF, spikes_valid)
 
 
-
-
+# run this script as demo script
+if __name__ == "__main__":
+    print()
+    print("Usage:")
+    print(r" * Set srcDataFilePath as the file path of the motion registered image sequence")
+    print(r" * Set srcROIFilePath as the file path of the ROI stack (ROIs need to be saved as mask images)")
+    print(r"NOTE: Please check the following VolPy notebook on how to use VolPy:")
+    print(r"URL: https://github.com/flatironinstitute/CaImAn/blob/main/demos/notebooks/demo_pipeline_voltage_imaging.ipynb")
+    print()
 
 
                                
